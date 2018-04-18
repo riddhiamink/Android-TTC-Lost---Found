@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg3"
+
+    tools:context=".MainActivityLogin">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="256dp"
+        android:layout_height="137dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/ttclogo" />
+
+    <EditText
+        android:id="@+id/txtUserName"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="206dp"
+        android:background="@drawable/textboxstyle"
+        android:drawableStart="@drawable/ic_action_user"
+        android:ems="10"
+
+        android:hint="@string/stringUserId"
+
+        android:inputType="textPersonName"
+        android:textColor="@android:color/black"
+         />
+
+    <EditText
+        android:id="@+id/textPassword"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="146dp"
+        android:background="@drawable/textboxstyle"
+        android:drawableStart="@drawable/ic_action_password"
+
+
+        android:ems="10"
+        android:hint="@string/stringPassword"
+        android:inputType="textPassword"
+        android:textColor="@android:color/black"
+        />
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="62dp"
+        android:background="@drawable/buttonstyle"
+        android:onClick="loginClick"
+        android:text="Login"
+        android:textColor="@android:color/black"
+        android:textSize="10pt" />
+
+    <Button
+        android:id="@+id/buttonOpenRegister"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="13dp"
+        android:background="@android:color/transparent"
+        android:onClick="registerBtnClick"
+        android:text="Register Here"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="10pt" />
+
+</RelativeLayout>

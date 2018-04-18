@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/displayItemCat"
+        android:layout_width="100dp"
+        android:layout_height="39dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/displayItemColor"
+        android:layout_marginTop="27dp"
+        android:layout_weight="1"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/displayItemColor"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="78dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/displayItemDes"
+        android:layout_width="369dp"
+        android:layout_height="101dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/displayItemCat"
+        android:layout_marginTop="132dp"
+        android:text="TextView" />
+
+    <!--<TextView-->
+        <!--android:id="@+id/displayIdentificationDoc"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="30dp"-->
+
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignStart="@+id/displayItemCat"-->
+        <!--android:layout_marginBottom="200dp"-->
+        <!--android:text="TextView" />-->
+
+    <TextView
+        android:id="@+id/displayItemLocation"
+        android:layout_width="100dp"
+        android:layout_height="43dp"
+
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/displayItemCat"
+        android:layout_marginEnd="21dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/displayItemDate"
+        android:layout_width="100dp"
+        android:layout_height="36dp"
+
+        android:layout_alignStart="@+id/displayItemLocation"
+        android:layout_alignTop="@+id/displayItemColor"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/btnValidate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Validate" />
+</RelativeLayout>

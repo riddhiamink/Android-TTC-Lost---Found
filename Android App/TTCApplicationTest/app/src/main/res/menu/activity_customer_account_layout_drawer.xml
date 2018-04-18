@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_add_claim_item"
+            android:title="Item Claim" />
+        <item
+            android:id="@+id/nav_add_found_item"
+            android:title="Add Found Item" />
+        <item
+            android:id="@+id/nav_list_claim_item"
+            android:title="List Claimed Items" />
+        <item
+            android:id="@+id/nav_list_found_item"
+            android:title="List Found Items" />
+        <item
+            android:id="@+id/nav_account_info"
+            android:title="Account Info" />
+        <item
+            android:id="@+id/nav_setting"
+            android:title="Settings" />
+        <item
+            android:id="@+id/nav_logout"
+            android:title="Logout" />
+
+    </group>
+
+
+
+</menu>

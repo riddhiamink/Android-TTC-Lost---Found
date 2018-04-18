@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddFountItems">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="680dp"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="#11000000"
+                android:text="Add Found Items"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="20pt"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/txtItemAddCategory"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/registration_textbox_style"
+
+                android:ems="10"
+                android:hint="Item Category"
+                android:inputType="textPersonName"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="10pt"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtItemAddColor"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/registration_textbox_style"
+
+                android:ems="10"
+                android:hint="Item Color"
+                android:inputType="textPersonName"
+                android:padding="12dp"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="10pt"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtItemAddDescription"
+                android:layout_width="350dp"
+                android:layout_height="90dp"
+
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/registration_textbox_style"
+
+                android:ems="10"
+                android:hint="Item Description"
+                android:inputType="textPersonName"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="10pt"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtItemAddFoundLoc"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/registration_textbox_style"
+
+                android:ems="10"
+                android:hint="Found Location"
+                android:inputType="textPersonName"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="10pt"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtItemAddFoundDate"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/registration_textbox_style"
+
+                android:ems="10"
+                android:hint="Found Date"
+                android:inputType="date"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="10pt"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/txtPicture"
+                android:layout_width="345dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/btnBrowse"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/buttonstyle"
+                android:text="Browse"
+                android:textSize="10pt"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnAddItems"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+
+                android:background="@drawable/buttonstyle"
+                android:text="Add"
+                android:textSize="10pt"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

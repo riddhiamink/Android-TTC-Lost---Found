@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ValidateFoundItem">
+
+    <!--<include layout="@layout/content_validate_found_item" />-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="257dp">
+
+        <TextView
+            android:id="@+id/displayItemCat"
+            android:layout_width="100dp"
+            android:layout_height="39dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/displayItemColor"
+            android:layout_marginTop="13dp"
+            android:layout_weight="1"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/displayItemColor"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/displayItemDes"
+            android:layout_marginTop="69dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/displayItemDes"
+            android:layout_width="366dp"
+            android:layout_height="101dp"
+            android:layout_above="@+id/btnValidate"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="3dp"
+            android:text="TextView" />
+
+        <!--<TextView-->
+        <!--android:id="@+id/displayIdentificationDoc"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="30dp"-->
+
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignStart="@+id/displayItemCat"-->
+        <!--android:layout_marginBottom="200dp"-->
+        <!--android:text="TextView" />-->
+
+        <TextView
+            android:id="@+id/displayItemLocation"
+            android:layout_width="100dp"
+            android:layout_height="43dp"
+
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/displayItemCat"
+            android:layout_marginEnd="21dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/displayItemDate"
+            android:layout_width="100dp"
+            android:layout_height="36dp"
+
+            android:layout_alignStart="@+id/displayItemLocation"
+            android:layout_alignTop="@+id/displayItemColor"
+            android:text="TextView" />
+
+        <Button
+            android:id="@+id/btnValidate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="53dp"
+            android:onClick="btnValidateClick"
+            android:text="Validate" />
+
+        <EditText
+            android:id="@+id/txtFoundItemId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:ems="10"
+            android:hint="Enter Match Id"
+            android:inputType="number" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="237dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <EditText
+            android:id="@+id/foundItemSearch"
+            android:layout_width="239dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/ic_action_phone_search"
+            android:ems="10"
+            android:hint="@android:string/search_go"
+            android:inputType="textPersonName" />
+
+        <ListView
+            android:id="@+id/listviewFoundItem"
+            android:layout_width="395dp"
+            android:layout_height="167dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
