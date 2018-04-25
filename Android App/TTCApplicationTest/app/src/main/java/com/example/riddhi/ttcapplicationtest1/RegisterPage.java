@@ -1,11 +1,14 @@
 package com.example.riddhi.ttcapplicationtest1;
-
+/*
+ * @author Chintan Patel
+ */
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,6 +55,36 @@ public class RegisterPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if(!validate())
+                {
+                    return;
+                }
+
+                try {
+                String data = new PostData().execute(
+                        mobile.getText().toString(),
+                        email.getText().toString(),
+                        password.getText().toString(),
+                        confirm_password.getText().toString(),
+                        firstName.getText().toString(),
+                        lastName.getText().toString(),
+                        address.getText().toString()).get();
+                if (data != null) {
+                    Toast.makeText(RegisterPage.this, "Account Created! Please Login", Toast.LENGTH_SHORT).show();
+
+                    finish();
+                    startActivity(new Intent(RegisterPage.this, MainActivityLogin.class));
+                } else {
+                    Toast.makeText(RegisterPage.this, "Please check inputs, and retry", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+/*
                 if (!password.getText().toString().isEmpty() &&
                         !confirm_password.getText().toString().isEmpty() &&
                         !email.getText().toString().isEmpty() &&
@@ -95,8 +128,126 @@ public class RegisterPage extends AppCompatActivity {
                 }
 
                 return;
+                */
             }
         });
+    }
+
+    public boolean validate()
+    {
+        String Email = email.getText().toString();
+        boolean flag = true;
+
+        if(firstName.getText().toString().isEmpty())
+        {
+            firstName.setError("Please enter firstname");
+            flag = false;
+        }
+        else
+        {
+            firstName.setError(null);
+        }
+        if(lastName.getText().toString().isEmpty())
+        {
+            lastName.setError("Please enter lastname");
+            flag = false;
+        }
+        else
+        {
+            lastName.setError(null);
+        }
+        if(address.getText().toString().isEmpty())
+        {
+            address.setError("Please enter address");
+            flag = false;
+        }
+        else
+        {
+            address.setError(null);
+        }
+        if(mobile.getText().toString().isEmpty())
+        {
+            mobile.setError("Please enter mobile number");
+            flag = false;
+        }
+        else
+        {
+            mobile.setError(null);
+        }
+        if(email.getText().toString().isEmpty())
+        {
+            email.setError("Please enter email");
+            flag = false;
+        }
+        else
+        {
+            email.setError(null);
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches())
+        {
+            email.setError("Please enter valid email.");
+            flag =  false;
+        }
+        else
+        {
+            email.setError(null);
+        }
+        if(password.getText().toString().isEmpty())
+        {
+            password.setError("Please enter password");
+            flag = false;
+        }
+        else
+        {
+            password.setError(null);
+        }
+        if(confirm_password.getText().toString().isEmpty())
+        {
+            confirm_password.setError("Please enter confirm password");
+            flag = false;
+        }
+        else
+        {
+            confirm_password.setError(null);
+        }
+        if (!confirm_password.getText().toString().equals(password.getText().toString()))
+        {
+            password.setError("Password do not match.");
+            flag = false;
+        }
+        else
+        {
+            password.setError(null);
+        }
+        if(password.getText().toString().length()<8)
+        {
+            password.setError("Password should be minimum 8 characters long.");
+            flag = false;
+        }
+        else
+        {
+            password.setError(null);
+        }
+        if(confirm_password.getText().toString().length()<8)
+        {
+            confirm_password.setError("Password should be minimum 8 characters long.");
+            flag = false;
+        }
+        else
+        {
+            confirm_password.setError(null);
+        }
+        if(mobile.getText().toString().length()!=10)
+        {
+            mobile.setError("Mobile number should contain 10 digits.");
+            flag = false;
+        }
+        else
+        {
+            mobile.setError(null);
+        }
+
+        return flag;
     }
 
     private class PostData extends AsyncTask<String, Void, String> {

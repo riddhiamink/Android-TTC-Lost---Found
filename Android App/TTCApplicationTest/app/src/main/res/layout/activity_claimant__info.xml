@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".DisplayUserAccount">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        app:srcCompat="@drawable/ic_action_phone_accountperson" />
+
+    <TextView
+        android:id="@+id/labelFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Firstname"
+        android:textSize="10pt" />
+
+    <TextView
+        android:id="@+id/labelLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Lastname"
+        android:textSize="10pt" />
+
+    <TextView
+        android:id="@+id/labelAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Address"
+        android:textSize="10pt" />
+
+    <TextView
+        android:id="@+id/labelPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="PhoneNumber"
+        android:textSize="10pt" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/labelEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/imgSend"
+            android:layout_marginTop="10dp"
+            android:text="Email"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:id="@+id/imgSend"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_action_email"/>
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

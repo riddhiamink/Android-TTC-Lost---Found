@@ -1,8 +1,10 @@
 package com.example.riddhi.ttcapplicationtest1;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -39,6 +41,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+
+/*
+ * @author Riddhi Amin
+ */
 public class AddFountItems extends Fragment {
 
     EditText category, description, location, color, date;
@@ -52,6 +58,8 @@ public class AddFountItems extends Fragment {
     private static final int REQUEST_WRITE_PERMISSION = 786;
 
     @Override
+
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         fragmentView = inflater.inflate(R.layout.activity_add_fount_items, container, false);
@@ -69,7 +77,9 @@ public class AddFountItems extends Fragment {
 
         Button browseButton = fragmentView.findViewById(R.id.btnBrowse);
         Button submitButton = fragmentView.findViewById(R.id.btnAddItems);
-
+       // textView_item_color.setVisibility(View.INVISIBLE);
+browseButton.setVisibility(View.INVISIBLE);
+tViewimage.setVisibility(View.INVISIBLE);
         browseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,7 +152,7 @@ public class AddFountItems extends Fragment {
                 String file_extn = imagePath.substring(imagePath.lastIndexOf(".") + 1);
                 tViewimage.setText(imagePath);
 
-                if (file_extn.equals("img") || file_extn.equals("jpg") || file_extn.equals("jpeg") || file_extn.equals("gif") || file_extn.equals("png")) {
+                if (file_extn.equals("img")  || file_extn.equals("jpeg") || file_extn.equals("gif") || file_extn.equals("png")) {
                     //FINE
                     gotImage = true;
                 } else {

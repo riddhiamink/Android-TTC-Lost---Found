@@ -8,14 +8,6 @@
 
     tools:context=".MainActivityLogin">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="256dp"
-        android:layout_height="137dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/ttclogo" />
-
     <EditText
         android:id="@+id/txtUserName"
         android:layout_width="250dp"

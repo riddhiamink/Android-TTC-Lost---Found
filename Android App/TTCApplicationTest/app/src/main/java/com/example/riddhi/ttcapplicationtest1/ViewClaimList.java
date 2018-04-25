@@ -1,5 +1,7 @@
 package com.example.riddhi.ttcapplicationtest1;
-
+/*
+ * @author Riddhi Amin
+ */
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -19,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -47,7 +50,7 @@ public class ViewClaimList extends Fragment {
     ListView listView;
     ArrayList<DisplayObject> displayObjects;
     String token, role;
-//    EditText searchText;
+    EditText searchText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,25 +59,27 @@ public class ViewClaimList extends Fragment {
         token = getArguments().getString(MainActivityLogin.Token);
         role = getArguments().getString(MainActivityLogin.Role);
 
-//        searchText = fragmentView.findViewById(R.id.foundItemSerach);
+        Toast.makeText(getActivity(), "view claim list", Toast.LENGTH_SHORT).show();
+
+        searchText = fragmentView.findViewById(R.id.claimItemSearch);
 
         listView = fragmentView.findViewById(R.id.listviewClaimList);
         SetListView(GetListData());
 
-//        searchText.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//
-//                if (keyCode == KeyEvent.KEYCODE_ENTER) {
-//                    if (!searchText.getText().toString().isEmpty())
-//                        SetListView(SerchListData(searchText.getText().toString()));
-//                    else
-//                        SetListView(GetListData());
-//                }
-//
-//                return false;
-//            }
-//        });
+        searchText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    if (!searchText.getText().toString().isEmpty())
+                        SetListView(SerchListData(searchText.getText().toString()));
+                    else
+                        SetListView(GetListData());
+                }
+
+                return false;
+            }
+        });
 
         return fragmentView;
     }
@@ -96,50 +101,21 @@ public class ViewClaimList extends Fragment {
             ArrayList<DisplayObject> listObject = new ArrayList<>();
             httpget.addHeader("Authorization", "Bearer " + params[0]);
 
-//            httpget.addHeader("Content-Type", "application/x-www-form-urlencoded");
-
             try {
-                // Add your data
-//                String username = params[0];
-//                String password = params[1];
-//            String Email = params[2];
-//            String Password = params[3];
-//            String House = params[4];
-//            String Street = params[5];
-//            String Landmark = params[6];
-
-//                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-//                nameValuePairs.add(new BasicNameValuePair("username", username));
-//                nameValuePairs.add(new BasicNameValuePair("password", password));
-//                nameValuePairs.add(new BasicNameValuePair("grant_type", "password"));
-//                httpget.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                 // Execute HTTP Post Request
                 HttpResponse response = httpclient.execute(httpget);
-
                 String json = EntityUtils.toString(response.getEntity());
-
-//                JSONObject myObject = new JSONObject(json);
-//                Log.d("responseData1", String.valueOf(myObject));
-
-//                String token = String.valueOf(myObject.get("access_token"));
-
-//                UserObject object = new UserObject();
-//                object.fullName = String.valueOf(myObject.get("fullName"));
-//                object.userName = String.valueOf(myObject.get("userName"));
-//                object.token = String.valueOf(myObject.get("access_token"));
-//                object.role = String.valueOf(myObject.get("role"));
 
                 JSONTokener tokener = new JSONTokener(json);
                 JSONArray jsonArray = new JSONArray(tokener);
-
-//                Log.d("responseData2", String.valueOf(finalResult.getString(0)));
 
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject obj = new JSONObject(jsonArray.getString(i));
                     DisplayObject d = new DisplayObject();
                     d.Id = obj.getInt("Id");
                     d.Color = obj.getString("Color");
+                    d.UserID = obj.getString("UserId");
                     d.Description = obj.getString("Description");
                     d.Location = obj.getString("Location");
                     d.ItemCategory = obj.getString("Category");
@@ -183,6 +159,7 @@ public class ViewClaimList extends Fragment {
                     DisplayObject d = new DisplayObject();
                     d.Id = obj.getInt("Id");
                     d.Color = obj.getString("Color");
+                    d.UserID = obj.getString("UserId");
                     d.Description = obj.getString("Description");
                     d.Location = obj.getString("Location");
                     d.ItemCategory = obj.getString("Category");
@@ -212,20 +189,6 @@ public class ViewClaimList extends Fragment {
 
             httpdelete.addHeader("Authorization", "Bearer " + params[0]);
             try {
-                // Add your data
-//                String username = params[0];
-//                String password = params[1];
-//            String Email = params[2];
-//            String Password = params[3];
-//            String House = params[4];
-//            String Street = params[5];
-//            String Landmark = params[6];
-
-//                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-//                nameValuePairs.add(new BasicNameValuePair("username", username));
-//                nameValuePairs.add(new BasicNameValuePair("password", password));
-//                nameValuePairs.add(new BasicNameValuePair("grant_type", "password"));
-//                httpget.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                 // Execute HTTP Post Request
                 HttpResponse response = httpclient.execute(httpdelete);
@@ -235,32 +198,6 @@ public class ViewClaimList extends Fragment {
 
                 String json = EntityUtils.toString(response.getEntity());
 
-//                JSONObject myObject = new JSONObject(json);
-//                Log.d("responseData1", String.valueOf(myObject));
-
-//                String token = String.valueOf(myObject.get("access_token"));
-
-//                UserObject object = new UserObject();
-//                object.fullName = String.valueOf(myObject.get("fullName"));
-//                object.userName = String.valueOf(myObject.get("userName"));
-//                object.token = String.valueOf(myObject.get("access_token"));
-//                object.role = String.valueOf(myObject.get("role"));
-
-//                JSONTokener tokener = new JSONTokener(json);
-//                JSONArray jsonArray = new JSONArray(tokener);
-//
-////                Log.d("responseData2", String.valueOf(finalResult.getString(0)));
-//
-//                for (int i = 0; i < jsonArray.length(); i++) {
-//                    JSONObject obj = new JSONObject(jsonArray.getString(i));
-//                    DisplayObject d = new DisplayObject();
-//                    d.Id = obj.getInt("Id");
-//                    d.Image = obj.getString("Image");
-//                    d.ItemCategory = obj.getString("Category");
-//                    d.ItemDate = obj.getString("DateLost");
-//
-//                    listObject.add(d);
-//                }
                 return json;
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
@@ -300,16 +237,17 @@ public class ViewClaimList extends Fragment {
             TextView textview_itemDesc = view.findViewById(R.id.displayItemDes);
 
             final int id = displayObjects.get(i).Id;
-            final String category = "Content: " + displayObjects.get(i).ItemCategory;
+            final String category = "Item: " + displayObjects.get(i).ItemCategory;
             final String date = "Date: " + displayObjects.get(i).ItemDate;
-            final String location = displayObjects.get(i).ItemDate;
+            final String location = "Location: "+displayObjects.get(i).Location;
             final String description = "Description: " + displayObjects.get(i).Description;
-            final String color = displayObjects.get(i).Color;
+            final String color = "Color: "+displayObjects.get(i).Color;
+            final String userid = "ID: "+displayObjects.get(i).UserID;
 
-            final String trakingId = displayObjects.get(i).TrakingId;
+            final String uId = displayObjects.get(i).UserID;
 
-//            Picasso.get().load(Webhook.IPADDRESS + "/" + displayObjects.get(i).Image).into(imageview);
-//            Log.e("errimg", displayObjectsts.get(i).Image);
+            final String trakingId =displayObjects.get(i).TrakingId;
+
             textview_itemName.setText(category);
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
             try
@@ -338,34 +276,13 @@ public class ViewClaimList extends Fragment {
             }
 
             Log.d("TrakingId", trakingId);
-//            final String StringId = "" + displayObjects.get(i).Id;
 
-//            Button deleteImageView = view.findViewById(R.id.btnDelete);
-//            Button modifyImageView = view.findViewById(R.id.btnClaimModify);
-//
-//            deleteImageView.setOnClickListener(new View.OnClickListener() {
-//                public void onClick(View v) {
-//                    try {
-//                        String data = new DeleteData().execute(token, StringId).get();
-//
-//                        if (data != null) {
-//                            SetListView(GetListData());
-//                        }
-//
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    } catch (ExecutionException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            });
-//
             btnValidate.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), ValidateFoundItem.class);
                     intent.putExtra("itemId", id);
                     intent.putExtra("token", token);
-
+                    intent.putExtra("UserId", uId);
                     intent.putExtra("category", category);
                     intent.putExtra("description", description);
                     intent.putExtra("date", date);
@@ -376,21 +293,13 @@ public class ViewClaimList extends Fragment {
                 }
             });
 
-//            btnClaimView.setOnClickListener(new View.OnClickListener() {
-//                public void onClick(View v) {
-//                    Intent intent = new Intent(getActivity(), ModigyItem.class);
-//                    intent.putExtra("itemId", id);
-//                    intent.putExtra("token", token);
-//                    startActivity(intent);
-//                }
-//            });
-
             return view;
         }
     }
 
     class DisplayObject {
         int Id;
+        String UserID;
         String ItemCategory;
         String ItemDate;
         String Description;

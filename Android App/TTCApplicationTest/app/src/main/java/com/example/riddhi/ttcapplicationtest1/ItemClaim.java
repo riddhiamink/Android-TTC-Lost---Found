@@ -1,5 +1,7 @@
 package com.example.riddhi.ttcapplicationtest1;
-
+/*
+ * @author Riddhi Amin
+ */
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -53,6 +55,14 @@ public class ItemClaim extends Fragment {
                 if (!date.getText().toString().isEmpty() && !category.getText().toString().isEmpty()
                         && !color.getText().toString().isEmpty() && !location.getText().toString().isEmpty() && !description.getText().toString().isEmpty()) {
                     try {
+
+                        if(description.getText().toString().length() > 50)
+                        {
+                            Toast.makeText(getActivity(), "Maximum 50 Character only", Toast.LENGTH_SHORT).show();
+
+                            return;
+                        }
+
                         String data = new PostData().execute(
                                 token,
                                 category.getText().toString(),

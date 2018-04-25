@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -119,7 +121,18 @@
                 android:textSize="10pt"
                 android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/btnAddItems"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
 
+                android:background="@drawable/buttonstyle"
+                android:text="Add"
+                android:textSize="10pt"
+                android:textStyle="bold" />
             <TextView
                 android:id="@+id/txtPicture"
                 android:layout_width="345dp"
@@ -140,18 +153,7 @@
                 android:textSize="10pt"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btnAddItems"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
 
-                android:background="@drawable/buttonstyle"
-                android:text="Add"
-                android:textSize="10pt"
-                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
 

@@ -35,7 +35,9 @@
         <activity
             android:name=".ValidateFoundItem"
             android:label="@string/title_activity_validate_found_item"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Claimant_Info" />
+        <activity android:name=".CustomerFoundList"></activity>
     </application>
 
 </manifest>

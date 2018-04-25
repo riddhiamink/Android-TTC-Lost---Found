@@ -1,10 +1,15 @@
 package com.example.riddhi.ttcapplicationtest1;
-
+/*
+ * @author Riddhi Amin
+ */
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Debug;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,10 +40,11 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivityLogin extends AppCompatActivity {
-
+   ActionBar actionBar;
     TextView userName;
     TextView password;
     SharedPreferences sharedPref;
+
 
     public static final String Token = "token";
     public static final String FullName = "full_name";
@@ -55,7 +61,8 @@ public class MainActivityLogin extends AppCompatActivity {
         password = (findViewById(R.id.textPassword));
 
         sharedPref = getSharedPreferences(MyPreference, Context.MODE_PRIVATE);
-
+actionBar=getSupportActionBar();
+actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ef2a0b")));
     }
 
     public void registerBtnClick(View view){

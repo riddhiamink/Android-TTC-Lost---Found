@@ -1,5 +1,7 @@
 package com.example.riddhi.ttcapplicationtest1;
-
+/*
+ * @author Simarpreet Kaur
+ */
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;

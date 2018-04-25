@@ -1,5 +1,7 @@
 package com.example.riddhi.ttcapplicationtest1;
-
+/*
+ * @author Abhi Sharma
+ */
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class ListDisplay extends Fragment {
     int[] Images = {R.drawable.bag, R.drawable.phone};
@@ -52,6 +56,7 @@ public class ListDisplay extends Fragment {
             ImageView imageview = (ImageView) view.findViewById(R.id.displayItemImage);
             TextView textview_itemName = (TextView) view.findViewById(R.id.labelItemId);
             TextView textview_itemDate = (TextView) view.findViewById(R.id.labelItmDateLost);
+            //TextView textView_itemLoc=(TextView) view.findViewById((R.id.labelItemLoc));
 
             imageview.setImageResource(Images[i]);
             textview_itemName.setText(ItemCategory[i]);

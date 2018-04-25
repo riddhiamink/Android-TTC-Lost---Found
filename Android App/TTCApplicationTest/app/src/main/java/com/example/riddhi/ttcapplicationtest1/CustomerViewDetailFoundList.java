@@ -1,5 +1,7 @@
 package com.example.riddhi.ttcapplicationtest1;
-
+/*
+ * @author Riddhi Amin
+ */
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 

@@ -25,10 +25,29 @@ namespace TTCLostAndFoundAppWebService.Controllers
             private set => _userManager = value;
         }
 
+        [ResponseType(typeof(ClaimedItemBindingModel))]
+        [System.Web.Http.HttpGet]
+        public IEnumerable GetFoundItems(string query)
+        {
+            return _db.ClaimedItems.OrderByDescending(c => c.DateLost).Where(c =>
+                c.Category.ToLower().Contains(query.ToLower())).Select(item => new FoundItemBindingModel
+                {
+                    Id = item.Id,
+                    UserId = item.UserId,
+                    DateLost = item.DateLost,
+                    Description = item.Description,
+                    Location = item.Location,
+                    Category = item.Category,
+                    Color = item.Color,
+                    TrackingId = string.IsNullOrEmpty(item.TrackingId) ? "null" : item.TrackingId
+                }).ToList();
+        }
+
+
         // GET: api/ClaimedItems
         public IEnumerable GetClaimedItems()
         {
-            return _db.ClaimedItems.Select(item => new ClaimedItemBindingModel
+            return _db.ClaimedItems.OrderByDescending(c => c.DateLost).Select(item => new ClaimedItemBindingModel
             {
                 Id = item.Id,
                 UserId = item.UserId,
@@ -151,6 +170,23 @@ namespace TTCLostAndFoundAppWebService.Controllers
             _db.SaveChanges();
 
             return Ok(claimedItem);
+        }
+
+        // its done
+        [ResponseType(typeof(UserInfoViewModel))]
+        public IHttpActionResult GetClaimUser(string userId)
+        {
+           var user = UserManager.FindById(userId);
+            if (user == null)
+                return BadRequest();
+            return Ok(new UserInfoViewModel
+            {
+                Address = user.Address,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Mobile = user.Mobile
+            });
         }
 
         [HttpGet]

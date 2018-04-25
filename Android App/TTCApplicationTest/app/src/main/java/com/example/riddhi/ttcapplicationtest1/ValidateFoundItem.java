@@ -1,5 +1,7 @@
 package com.example.riddhi.ttcapplicationtest1;
-
+/*
+ * @author Riddhi Amin
+ */
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -29,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -40,7 +43,7 @@ import java.util.concurrent.ExecutionException;
 public class ValidateFoundItem extends AppCompatActivity {
     ArrayList<DisplayObject> displayObjects;
 
-    String token;
+    String token, UserID;
     int itemId;
     ListView listView;
     EditText searchText, txtFoundItemId;
@@ -48,7 +51,7 @@ public class ValidateFoundItem extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_validate_found_item);
+        setContentView(R.layout.activity_validate_found_item1);
         token = getIntent().getExtras().getString(MainActivityLogin.Token);
 
         txtFoundItemId = findViewById(R.id.txtFoundItemId);
@@ -60,6 +63,7 @@ public class ValidateFoundItem extends AppCompatActivity {
         TextView textview_itemDesc = findViewById(R.id.displayItemDes);
 
         itemId = getIntent().getExtras().getInt("itemId");
+        UserID = getIntent().getExtras().getString("UserId");
         //displayObjects.get(i).Id;
         String category = getIntent().getExtras().getString("category");
         String date = getIntent().getExtras().getString("date");
@@ -105,17 +109,22 @@ public class ValidateFoundItem extends AppCompatActivity {
     }
 
     public void btnValidateClick(View view) {
-        if (txtFoundItemId.getText().toString().isEmpty()) {
+        if (txtFoundItemId.getText().toString().isEmpty())
+        {
             Toast.makeText(this, "Please provide a match Id", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        try {
+        try
+        {
             String data = new GetValidateData().execute(token, "" + itemId, txtFoundItemId.getText().toString()).get();
 
-            if (data != null) {
+            if (data != null)
+            {
                 Toast.makeText(this, "Tracking ID Crated: " + data, Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(this, CustomerAccountLayout.class);
+                Intent intent = new Intent(this, Claimant_Info.class);
+                intent.putExtra("UserID", UserID);
+                intent.putExtra("TrackingID", data);
+                intent.putExtra("token", token);
                 startActivity(intent);
                 return;
             }
@@ -175,53 +184,25 @@ public class ValidateFoundItem extends AppCompatActivity {
             ArrayList<DisplayObject> listObject = new ArrayList<>();
             httpget.addHeader("Authorization", "Bearer " + params[0]);
 
-//            httpget.addHeader("Content-Type", "application/x-www-form-urlencoded");
-
-            try {
-                // Add your data
-//                String username = params[0];
-//                String password = params[1];
-//            String Email = params[2];
-//            String Password = params[3];
-//            String House = params[4];
-//            String Street = params[5];
-//            String Landmark = params[6];
-
-//                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-//                nameValuePairs.add(new BasicNameValuePair("username", username));
-//                nameValuePairs.add(new BasicNameValuePair("password", password));
-//                nameValuePairs.add(new BasicNameValuePair("grant_type", "password"));
-//                httpget.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-                // Execute HTTP Post Request
+            try
+            {
                 HttpResponse response = httpclient.execute(httpget);
-
                 String json = EntityUtils.toString(response.getEntity());
-
-//                JSONObject myObject = new JSONObject(json);
-//                Log.d("responseData1", String.valueOf(myObject));
-
-//                String token = String.valueOf(myObject.get("access_token"));
-
-//                UserObject object = new UserObject();
-//                object.fullName = String.valueOf(myObject.get("fullName"));
-//                object.userName = String.valueOf(myObject.get("userName"));
-//                object.token = String.valueOf(myObject.get("access_token"));
-//                object.role = String.valueOf(myObject.get("role"));
-
                 JSONTokener tokener = new JSONTokener(json);
                 JSONArray jsonArray = new JSONArray(tokener);
 
-//                Log.d("responseData2", String.valueOf(finalResult.getString(0)));
-
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject obj = new JSONObject(jsonArray.getString(i));
-                    if (obj.getString("TrakingId") != null) {
+                    if (obj.getString("TrackingId").equals("null")) {
                         DisplayObject d = new DisplayObject();
                         d.Id = obj.getInt("Id");
                         d.Image = obj.getString("Image");
+                        d.ItemUserID = obj.getString("UserId");
                         d.ItemCategory = obj.getString("Category");
+                        d.ItemColor = obj.getString("Color");
+                        d.ItemDesc = obj.getString("Description");
                         d.ItemDate = obj.getString("DateLost");
+                        d.ItemLoc=obj.getString("Location");
                         listObject.add(d);
                     }
                 }
@@ -258,13 +239,16 @@ public class ValidateFoundItem extends AppCompatActivity {
 
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject obj = new JSONObject(jsonArray.getString(i));
-                    if (obj.getString("TrakingId") != null) {
+                    if (obj.getString("TrackingId").equals("null")) {
                         DisplayObject d = new DisplayObject();
                         d.Id = obj.getInt("Id");
                         d.Image = obj.getString("Image");
+                        d.ItemUserID = obj.getString("UserId");
                         d.ItemCategory = obj.getString("Category");
+                        d.ItemColor = obj.getString("Color");
+                        d.ItemDesc = obj.getString("Description");
                         d.ItemDate = obj.getString("DateLost");
-
+                        d.ItemLoc=obj.getString("Location");
                         listObject.add(d);
                     }
                 }
@@ -304,13 +288,20 @@ public class ValidateFoundItem extends AppCompatActivity {
             view = getLayoutInflater().inflate(R.layout.employer_found_list_layout, null);
             ImageView imageview = (ImageView) view.findViewById(R.id.displayItemImage);
             TextView textview_itemName = (TextView) view.findViewById(R.id.labelItemCategory);
+            TextView textview_itemColor = (TextView) view.findViewById(R.id.labelItemColor);
+            TextView textview_itemDesc = (TextView) view.findViewById(R.id.labelItemDesc);
             TextView textview_itemDate = (TextView) view.findViewById(R.id.labelItmDateLost);
             TextView textview_itemId = (TextView) view.findViewById(R.id.labelItemId);
+            TextView textview_loc = (TextView) view.findViewById(R.id.labelItemLoc);
             TextView textview_trackingId = (TextView) view.findViewById(R.id.labelItmTrackingId);
+
 
             Picasso.get().load(Webhook.IPADDRESS + "/" + displayObjects.get(i).Image).into(imageview);
 
             textview_itemName.setText(displayObjects.get(i).ItemCategory);
+            textview_itemColor.setText(displayObjects.get(i).ItemColor);
+            textview_itemDesc.setText(displayObjects.get(i).ItemDesc);
+            textview_loc.setText((displayObjects.get(i).ItemLoc));
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
             try
             {
@@ -340,7 +331,11 @@ public class ValidateFoundItem extends AppCompatActivity {
         int Id;
         String Image;
         String ItemCategory;
+        String ItemUserID;
+        String ItemColor;
+        String ItemDesc;
         String ItemDate;
+        String ItemLoc;
     }
 
     @Override
@@ -375,12 +370,12 @@ public class ValidateFoundItem extends AppCompatActivity {
         return null;
     }
 
-
     class ClaimedObject {
         int Id;
         String ItemCategory;
         String ItemDate;
         String Description;
+        String UserID;
         String Color;
         String Location;
     }

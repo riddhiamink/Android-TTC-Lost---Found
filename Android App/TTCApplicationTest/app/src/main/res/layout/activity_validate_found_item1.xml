@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ValidateFoundItem">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnValidate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:onClick="btnValidateClick"
+            android:text="Generate Tracking ID" />
+
+        <EditText
+            android:id="@+id/txtFoundItemId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentLeft="true"
+            android:ems="10"
+            android:hint="Enter Match Id"
+            android:inputType="number" />
+    </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/displayItemCat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Name"
+                android:textSize="7pt" />
+
+            <TextView
+                android:id="@+id/displayItemColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Item Color"
+                android:textSize="7pt" />
+
+            <TextView
+                android:id="@+id/displayItemDes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Description"
+                android:textSize="7pt" />
+
+            <TextView
+                android:id="@+id/displayItemLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Location"
+                android:textSize="7pt" />
+
+            <TextView
+                android:id="@+id/displayItemDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Date"
+                android:textSize="7pt" />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp" >
+
+        <EditText
+            android:id="@+id/foundItemSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_action_phone_search"
+            android:ems="10"
+            android:hint="@android:string/search_go"
+            android:inputType="textPersonName" />
+
+        <ListView
+            android:id="@+id/listviewFoundItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</LinearLayout>

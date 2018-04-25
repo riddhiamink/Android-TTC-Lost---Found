@@ -37,7 +37,7 @@ namespace TTCLostAndFoundAppWebService.Controllers
         // GET: api/FoundItems
         public IEnumerable GetFoundItems()
         {
-            return _db.FoundItems.Select(item => new FoundItemBindingModel
+            return _db.FoundItems.OrderByDescending(c => c.DateLost).Select(item => new FoundItemBindingModel
             {
                 Id = item.Id,
                 UserId = item.UserId,
@@ -79,7 +79,7 @@ namespace TTCLostAndFoundAppWebService.Controllers
         [System.Web.Http.HttpGet]
         public IEnumerable GetFoundItems(string query)
         {
-            return _db.FoundItems.Where(c =>
+            return _db.FoundItems.OrderByDescending(c => c.DateLost).Where(c =>
                 c.Category.ToLower().Contains(query.ToLower())
                 || c.TrackingId == query).Select(item => new FoundItemBindingModel
             {
@@ -160,7 +160,7 @@ namespace TTCLostAndFoundAppWebService.Controllers
 
                     int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB  
 
-                    IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png" };
+                    IList<string> AllowedFileExtensions = new List<string> {  ".png" };
                     var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
                     var extension = ext.ToLower();
                     if (!AllowedFileExtensions.Contains(extension))
@@ -190,7 +190,7 @@ namespace TTCLostAndFoundAppWebService.Controllers
                 }
                 else
                 {
-                    filePath = "Images/Dummy.jpg.jpg";
+                    filePath = "Images/lost_item.png";
                     //    //var res = string.Format("Please Upload a image.");
                     //    //ModelState.AddModelError("error", res);
                     //    //return NotFound();

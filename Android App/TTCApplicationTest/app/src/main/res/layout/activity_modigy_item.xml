@@ -18,7 +18,7 @@
             android:padding="30dp">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/lbmodifyView"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -37,7 +37,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="25dp"
-                android:background="@drawable/registration_textbox_style"
+
 
                 android:ems="10"
                 android:hint="Item Category"
@@ -54,7 +54,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/registration_textbox_style"
+
 
                 android:ems="10"
                 android:hint="Item Color"
@@ -66,13 +66,26 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/dateModifyPicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+
+                android:ems="10"
+                android:hint="date"
+                android:inputType="date"
+                android:textAlignment="center"
+                android:textSize="10pt"
+                android:textStyle="bold" />
+            <EditText
                 android:id="@+id/txtItemModifyDescription"
                 android:layout_width="350dp"
                 android:layout_height="90dp"
 
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/registration_textbox_style"
+
 
                 android:ems="10"
                 android:hint="Item Description"
@@ -88,7 +101,7 @@
 
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/registration_textbox_style"
+
 
                 android:ems="10"
                 android:hint="Found Location"
@@ -98,16 +111,7 @@
                 android:textSize="10pt"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/dateModifyPicker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/registration_textbox_style"
-                android:ems="10"
-                android:hint="date"
-                android:inputType="date" />
+
 
 
             <Button

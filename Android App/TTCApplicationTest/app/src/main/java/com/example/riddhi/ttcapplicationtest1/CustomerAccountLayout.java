@@ -1,5 +1,7 @@
 package com.example.riddhi.ttcapplicationtest1;
-
+/*
+ * @author Solanky Thareja
+ */
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -92,14 +94,44 @@ public class CustomerAccountLayout extends AppCompatActivity
         if (role.equalsIgnoreCase("BusGanitor")) {
             addClaimItem.setVisible(false);
             listClaimItem.setVisible(false);
+            Fragment  fragment = new employer_list_view();
+            Bundle bundle = new Bundle();
+            bundle.putString(MainActivityLogin.Token, token);
+            bundle.putString(MainActivityLogin.Role, role);
+            fragment.setArguments(bundle);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.layoutMain, fragment).commit();
         } else if (role.equalsIgnoreCase("ItemValidator")) {
             addClaimItem.setVisible(false);
+            Fragment  fragment = new ViewClaimList();
+            Bundle bundle = new Bundle();
+            bundle.putString(MainActivityLogin.Token, token);
+            bundle.putString(MainActivityLogin.Role, role);
+            fragment.setArguments(bundle);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.layoutMain, fragment).commit();
         } else if (role.equalsIgnoreCase("BoothReceptionist")) {
             addClaimItem.setVisible(false);
             addFoundItem.setVisible(false);
+            Fragment  fragment = new employer_list_view();
+            Bundle bundle = new Bundle();
+            bundle.putString(MainActivityLogin.Token, token);
+            bundle.putString(MainActivityLogin.Role, role);
+            fragment.setArguments(bundle);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.layoutMain, fragment).commit();
+
         } else {
             addFoundItem.setVisible(false);
             listClaimItem.setVisible(false);
+
+            Fragment  fragment = new employer_list_view();
+            Bundle bundle = new Bundle();
+            bundle.putString(MainActivityLogin.Token, token);
+            bundle.putString(MainActivityLogin.Role, role);
+            fragment.setArguments(bundle);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.layoutMain, fragment).commit();
         }
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -192,7 +224,8 @@ public class CustomerAccountLayout extends AppCompatActivity
         return true;
     }
 
-
+    // Cretead by Riddhi Amin
+    // Posts data to the API for Logging out the customer
     private class PostData extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... params) {
             // Create a new HttpClient and Post Header

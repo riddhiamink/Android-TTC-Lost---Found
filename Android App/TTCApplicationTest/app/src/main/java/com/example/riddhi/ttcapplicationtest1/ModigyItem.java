@@ -1,10 +1,14 @@
 package com.example.riddhi.ttcapplicationtest1;
-
+/*
+ * @author Riddhi Amin
+ */
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -33,6 +37,8 @@ public class ModigyItem extends AppCompatActivity {
     EditText category, color, description, location, date;
     String token;
     int itemId;
+    TextView modifyViwe;
+    Button modify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +51,23 @@ public class ModigyItem extends AppCompatActivity {
         location = findViewById(R.id.txtItemModifyFoundLoc);
         date = findViewById(R.id.dateModifyPicker);
 
+        modify = findViewById(R.id.btnModifyItems);
+        modifyViwe = findViewById(R.id.lbmodifyView);
+
         token = getIntent().getExtras().getString("token");
         itemId = getIntent().getExtras().getInt("itemId");
+        String role = getIntent().getExtras().getString("role");
+
+        if(!role.equals("ItemValidator")){
+            description.setVisibility(View.INVISIBLE);
+            location.setVisibility(View.INVISIBLE);
+            modify.setVisibility(View.INVISIBLE);
+            modifyViwe.setText("View Item ID : " + itemId);
+            date.setEnabled(false);
+            category.setEnabled(false);
+            color.setEnabled(false);
+        }
+
 
         try {
             FoundItem item = new GetItemData().execute(token, "" + itemId).get();

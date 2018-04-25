@@ -1,10 +1,15 @@
 package com.example.riddhi.ttcapplicationtest1;
-
+/*
+ * @author Riddhi Amin
+ */
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -16,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +46,7 @@ import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 public class employer_list_view extends Fragment {
-    ArrayList<DisplayObject> displayObjects;
+    ArrayList<DisplayObject> displayObjects = new ArrayList<>();
 
     View fragmentView;
     String token, role;
@@ -141,6 +147,8 @@ public class employer_list_view extends Fragment {
                     d.ItemCategory = obj.getString("Category");
                     d.ItemDate = obj.getString("DateLost");
                     d.TrakingId = obj.getString("TrackingId");
+                    d.Color = obj.getString("Color");
+                    d.Description = obj.getString("Description");
                     listObject.add(d);
                 }
                 return listObject;
@@ -182,6 +190,8 @@ public class employer_list_view extends Fragment {
                     d.ItemCategory = obj.getString("Category");
                     d.ItemDate = obj.getString("DateLost");
                     d.TrakingId = obj.getString("TrackingId");
+                    d.Color = obj.getString("Color");
+                    d.Description = obj.getString("Description");
                     listObject.add(d);
                 }
                 return listObject;
@@ -296,11 +306,15 @@ public class employer_list_view extends Fragment {
             TextView textview_itemDate = (TextView) view.findViewById(R.id.labelItmDateLost);
             TextView textview_itemName = (TextView) view.findViewById(R.id.labelItemCategory);
             TextView textview_trackingId = (TextView) view.findViewById(R.id.labelItmTrackingId);
-
+            TextView textView_itemdesc=(TextView) view.findViewById((R.id.labelItemDesc));
+            TextView textView_item_color=(TextView) view.findViewById((R.id.labelItemColor));
+            TextView textView_item_loc=(TextView) view.findViewById(R.id.labelItemLoc);
             Picasso.get().load(Webhook.IPADDRESS + "/" + displayObjects.get(i).Image).into(imageview);
 
-            textview_itemName.setText(displayObjects.get(i).ItemCategory);
-
+            textview_itemName.setText("Item Category: "+displayObjects.get(i).ItemCategory);
+            textView_item_color.setText("Item Color: "+ displayObjects.get(i).Color);
+            textView_itemdesc.setText("Item Description: "+displayObjects.get(i).Description);
+            textView_item_loc.setText("Location: "+displayObjects.get(i).Location);
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
             try
             {
@@ -309,7 +323,7 @@ public class employer_list_view extends Fragment {
             }
             catch (ParseException ex)
             {
-                textview_itemDate.setText(displayObjects.get(i).ItemDate);
+                textview_itemDate.setText("Found Date: "+displayObjects.get(i).ItemDate);
             }
 
             final String StringId = "" + displayObjects.get(i).Id;
@@ -322,11 +336,15 @@ public class employer_list_view extends Fragment {
 
             if (!role.equals("ItemValidator") || !trakingId.equals("null")) {
                 deleteImageView.setVisibility(View.INVISIBLE);
-                modifyImageView.setVisibility(View.INVISIBLE);
+//                modifyImageView.setVisibility(View.INVISIBLE);
+            }
+
+            if(!role.equals("ItemValidator")){
+                modifyImageView.setText("View");
             }
 
             if (!role.equals("Customer")) {
-                if (trakingId.equals("null")) {
+                if (trakingId.equals("null") ) {
                     textview_trackingId.setVisibility(View.INVISIBLE);
                 } else {
                     textview_trackingId.setText("Traking Id: " + trakingId);
@@ -334,22 +352,47 @@ public class employer_list_view extends Fragment {
             } else {
                 textview_trackingId.setVisibility(View.INVISIBLE);
             }
+            if (role.equals("Customer")) { textView_itemdesc.setVisibility(View.INVISIBLE);
+            textView_item_loc.setVisibility(View.INVISIBLE);
+           textView_item_color.setVisibility(View.INVISIBLE);
+            }
 
 
             deleteImageView.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    try {
-                        String data = new DeleteData().execute(token, StringId).get();
-
-                        if (data != null) {
-                            SetListView(GetListData());
+                        AlertDialog.Builder builder;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+                        } else {
+                            builder = new AlertDialog.Builder(getActivity());
                         }
+                        builder.setTitle("Delete entry")
+                                .setMessage("Are you sure you want to delete this entry?")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        try {
+                                        String data = new DeleteData().execute(token, StringId).get();
 
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    }
+                                        if (data != null) {
+                                            Toast.makeText(getActivity(), "Record Deleted Successfully.", Toast.LENGTH_SHORT).show();
+                                            SetListView(GetListData());
+                                        }
+
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    } catch (ExecutionException e) {
+                                        e.printStackTrace();
+                                    }
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // do nothing
+                                    }
+                                })
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
+
                 }
             });
 
@@ -358,6 +401,7 @@ public class employer_list_view extends Fragment {
                     Intent intent = new Intent(getActivity(), ModigyItem.class);
                     intent.putExtra("itemId", id);
                     intent.putExtra("token", token);
+                    intent.putExtra("role", role);
                     startActivity(intent);
                 }
             });
@@ -373,6 +417,9 @@ public class employer_list_view extends Fragment {
         String ItemCategory;
         String ItemDate;
         String TrakingId;
+        String Color;
+        String Description;
+        String Location;
     }
 
     @Override
